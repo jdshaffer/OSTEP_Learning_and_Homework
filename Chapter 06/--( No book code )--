@@ -1,0 +1,19 @@
+
+
+BOOK CODE
+https://github.com/remzi-arpacidusseau/ostep-code
+
+HOMEWORK CODE
+https://github.com/remzi-arpacidusseau/ostep-homework/tree/master
+
+PROJECTS CODE
+https://github.com/remzi-arpacidusseau/ostep-projects
+
+
+
+BUILD PROGRAMS
+gcc -Wall -o mem mem.c
+
+
+RUN PROGRAMS
+./mem
