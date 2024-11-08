@@ -1,5 +1,8 @@
 //----------------------------------------------------------------------
 // Simple program to time system calls.
+// Jeffrey D. Shaffer
+// 2024-11-08
+//
 // First  test -- open-read-close an empty text file 10,000 times
 // Second test -- mkdir-rm-dir 10,000 times
 //
@@ -7,18 +10,19 @@
 // Average time for open/read/close system calls: 3.63 microseconds
 // Average time for   mkdir/rmdir   system calls: 4.84 microseconds
 //
-// RESULTS ON RASPI
+// RESULTS ON RASPBERRY PI 4b+
 // Average time for open/read/close system calls: 5.42 microseconds
 // Average time for   mkdir/rmdir   system calls: 18.49 microseconds
 //
+//----------------------------------------------------------------------
 // Jds Learning Notes: 
-//   <fcntl.h> (File Control)   -- Contains definitions for file access modes
-//   <unistd.h> (UNIX Standard) -- Core UNIX system calls interface
-//   <sys/stat.h> -- Focuses on file status and properties
-//   struct timeval {
-//       time_t      tv_sec;     /* seconds */
-//       suseconds_t tv_usec;    /* microseconds */
-//   };
+//    <fcntl.h> (File Control)   -- Contains definitions for file access modes
+//    <unistd.h> (UNIX Standard) -- Core UNIX system calls interface
+//    <sys/stat.h> -- Focuses on file status and properties
+//    struct timeval {
+//        time_t      tv_sec;     /* seconds */
+//        suseconds_t tv_usec;    /* microseconds */
+//    };
 // 
 //----------------------------------------------------------------------
 

@@ -1,12 +1,28 @@
 //----------------------------------------------------------------------
 // Simple program to time context switching.
-// This one was written by Claude as I had no idea how to do it. Sadly.
+// Written by Claude as I had no idea how to do it at first
+// 2024-11-08
 // 
 // RESULTS ON OSX:
 // Average context switch time: 2.78 microseconds
 //
-// RESULTS ON RASPI
+// RESULTS ON RASPBERRY PI 4b+
 // Average context switch time: 18.67 microseconds
+//
+//----------------------------------------------------------------------
+// Jds Learning Notes:
+//    <pthread.h> -- Gives access to multithreading functions and types
+//                -- Used here for setting the thread_affinity (only one CPU)
+//    pipe[2]     -- Pipes ALWAYS are of size 2 (by function), but size has to be
+//                   declared when created
+//
+// Jds Notes:
+//     - This measures "context switching" because the computer must
+//       switch between the parent process and child process with each
+//       read-write to the two pipes
+//    - I might have been able to write this code with some reference
+//      help on pipes and the time struct, but I NEVER would have been
+//      able to figure out the thread_affinity code.
 //
 //----------------------------------------------------------------------
 
@@ -35,7 +51,7 @@ int main() {
     char buf[1];
     pid_t pid;
     struct timeval start, end;
-    long long total_time = 0;
+    double total_time = 0;
     
     // Create pipes
     if (pipe(pipe1) == -1 || pipe(pipe2) == -1) {
@@ -43,6 +59,7 @@ int main() {
         exit(1);
     }
     
+    // Fork the program here
     pid = fork();
     if (pid == -1) {
         perror("fork failed");
@@ -52,8 +69,9 @@ int main() {
     if (pid == 0) {  // Child process
         set_thread_affinity(0);  // Bind to CPU 0
         
+        // Child will read from pipe1 and write to pipe2
         close(pipe1[1]);  // Close write end of pipe1
-        close(pipe2[0]);  // Close read end of pipe2
+        close(pipe2[0]);  // Close  read end of pipe2
         
         // Warm-up phase
         for (int i = 0; i < WARM_UP_ITERATIONS; i++) {
@@ -71,6 +89,7 @@ int main() {
     } else {  // Parent process
         set_thread_affinity(0);  // Bind to CPU 0
         
+        // Parent will read from pipe2 and write to pipe1
         close(pipe1[0]);  // Close read end of pipe1
         close(pipe2[1]);  // Close write end of pipe2
         
