@@ -19,8 +19,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     char buffer[256];  // An array to hold character data (to share between forks)
 
     int pid1, pid2;    // Make int variables to hold fork pids

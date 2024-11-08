@@ -9,14 +9,18 @@ Let me break down what this code does:
 1. Function Declaration:
    # void swtch(struct context *old, struct context *new);
 
-This function takes two parameters: pointers to the old and new context structures.
+   This function takes two parameters: pointers to the old and 
+   new context structures.
 
 
 2. The code has two main parts:
     First Part - Saving Current Context:
-        - It saves all the current CPU registers into the old context structure
-        - The registers being saved are: eax, ebx, ecx, edx, esi, edi, ebp, esp (stack pointer), and the return address (IP)
-        - Each register is stored at a specific offset from the address in eax:
+        - It saves all the current CPU registers into the old 
+          context structure
+        - The registers being saved are: eax, ebx, ecx, edx, esi, 
+          edi, ebp, esp (stack pointer), and the return address (IP)
+        - Each register is stored at a specific offset from the 
+          address in eax:
             - IP at offset 0
             - esp at offset 4
             - ebx at offset 8
@@ -25,8 +29,10 @@ This function takes two parameters: pointers to the old and new context structur
     Second Part - Loading New Context:
         - It loads all registers from the new context structure
         - It loads them in reverse order from how they were saved
-        - The key step is loading the new stack pointer (esp), which effectively switches the stack
-        - Finally, it pushes the saved return address and executes ret, which jumps to the new context's instruction pointer
+        - The key step is loading the new stack pointer (esp), 
+          which effectively switches the stack
+        - Finally, it pushes the saved return address and executes 
+          ret, which jumps to the new context's instruction pointer
 
 
 The effect of this code is to:
