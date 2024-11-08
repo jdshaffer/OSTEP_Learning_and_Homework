@@ -2,8 +2,11 @@
 // Simple program to time context switching.
 // This one was written by Claude as I had no idea how to do it. Sadly.
 // 
-// First  test -- 
-// Second test -- 
+// RESULTS ON OSX:
+// Average context switch time: 2.78 microseconds
+//
+// RESULTS ON RASPI
+// Average context switch time: 18.67 microseconds
 //
 //----------------------------------------------------------------------
 

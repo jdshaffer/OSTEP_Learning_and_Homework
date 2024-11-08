@@ -3,6 +3,14 @@
 // First  test -- open-read-close an empty text file 10,000 times
 // Second test -- mkdir-rm-dir 10,000 times
 //
+// RESULTS ON OSX:
+// Average time for open/read/close system calls: 3.63 microseconds
+// Average time for   mkdir/rmdir   system calls: 4.84 microseconds
+//
+// RESULTS ON RASPI
+// Average time for open/read/close system calls: 5.42 microseconds
+// Average time for   mkdir/rmdir   system calls: 18.49 microseconds
+//
 //----------------------------------------------------------------------
 
 
